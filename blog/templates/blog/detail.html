@@ -1,0 +1,134 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<style>
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  /* Header - inherited from base.html */
+
+  /* Main Content & Sidebar */
+  .container {
+    display: flex;
+    flex: 1;
+    padding: 20px;
+  }
+
+  .main-content {
+    flex: 3;
+    margin-right: 20px;
+  }
+
+  .sidebar {
+    flex: 1;
+    background-color: #1a1a1a;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(187, 134, 252, 0.1);
+  }
+
+  .post-title {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #bb86fc;
+  }
+
+  .post-date {
+    color: #bbbbbb;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+  }
+
+  img {
+    width: 100%;
+    max-height: 450px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+
+  .related-posts a {
+    display: block;
+    color: #03dac6;
+    text-decoration: none;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .related-posts a:hover {
+    color: #bb86fc;
+  }
+
+  .footer {
+    background-color: #1e1e1e;
+    color: #aaaaaa;
+    text-align: center;
+    padding: 1rem;
+    margin-top: auto;
+    border-top: 1px solid #333;
+  }
+
+  .footer-content a {
+    color: #03dac6;
+    text-decoration: none;
+    margin: 0 0.5rem;
+  }
+
+  .footer-content a:hover {
+    color: #bb86fc;
+  }
+
+  /* Responsive Tweaks */
+  @media (max-width: 768px) {
+    .navbar {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .nav-links a {
+      margin: 0.5rem;
+    }
+
+    .container {
+      flex-direction: column;
+    }
+
+    .main-content {
+      margin-right: 0;
+    }
+  }
+  p {
+  color:rgb(222, 222, 221);
+  line-height: 1.6;
+  font-size: 1.05rem;
+}
+
+</style>
+
+<!-- Main Content -->
+<div class="container">
+  <div class="main-content">
+    <div class="post-title">{{ post.title }} <small> ({{post.category.name}}) </small></div>
+    <div class="post-date">Posted on {{ post.created_at | date:"F j, Y" }}</div>
+    <img src="{{ post.img_url }}" alt="Post image">
+    <p>{{ post.content }}</p>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h3 style="color: #bb86fc; margin-bottom: 10px;"> Related Posts ({{post.category.name}})</h3>
+    <div class="related-posts">
+      {% for related_post in related_posts %}
+      <a href="{% url 'blog:post' slug=related_post.slug %}">{{related_post.title}}</a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}
