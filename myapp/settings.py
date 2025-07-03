@@ -25,10 +25,10 @@ SECRET_KEY = 'django-insecure-lv$@_85m53jnqyk2!9%!09euf3wva74=&u!)p8w$+yvia*0huq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1'
-]
+#ALLOWED_HOSTS = [
+#    'localhost',
+ #   '127.0.0.1'
+#]
 
 ALLOWED_HOSTS = ['blogsphere-1-buot.onrender.com']
 
